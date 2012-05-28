@@ -324,4 +324,63 @@ $db->insert('records', $data);
 $db->insert('records', $data, true);
 ```
 
+## update()
+
+update() is very similar to insert(), but (as you probably guessed) is used for updating row(s).
+
+### Parameters
+
+* $table - Table to use (table name)
+* $bind - Array of data to insert
+* $where - A typical WHERE condition as a string. An array could be passed for binding parameters. Look at the examples for more information. 
+* $limit - Limit the updated rows. If 0 - not limit is applied
+
+### Return values
+Returns the count of the affected rows
+
+### Examples
+
+```php
+<?php
+$data = array(
+    'status' => 'destroyed',
+    'intendedFor' => 'Inteligent people'
+);
+$db->update('music', $data, '`genre` = \'Real hip hop\'');
+```
+
+Using where as an array of column-value pairs and a limit update up to 3 rows
+```php
+<?php
+$data = array(
+    'status' => 'destroyed',
+    'intendedFor' => 'People you don\'t wanna mess with'
+);
+$db->update('music', $data, array('`genre` = ?' => 'Hardcore rap'), 3);
+```
+
+## delete()
+delete() is very similar to update(), but (as as you probably guessed again) is used for row(s) removal.
+
+### Parameters
+
+* $table - Table to use (table name)
+* $where - A typical WHERE condition as a string. An array could be passed for binding parameters. Look at the examples for more information. 
+* $limit - Limit the updated rows. If 0 - not limit is applied
+
+### Return values
+Returns the count of the affected rows
+
+### Examples 
+
+```php
+<?php
+$db->delete('music', '`genre` = \'dubstep\'');
+```
+Using column-value pairs for the WHERE clause and limit up to 100 rows
+```php
+<?php
+$db->delete('music', array('`genre` = ?' => 'hiphop', '`topic` = ?' => 'Money, b*tches, cars'), 100);
+```
+
 Ok... at this point I'm probably on some party, getting drunk and sh*t, so... to be continued...
