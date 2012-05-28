@@ -185,4 +185,21 @@ array(4) {
 }
 ```
 
+Example with foreach:
+```php
+<?php
+$rows = $db->fetchAll('SELECT * FROM my_fav_albums WHERE `year` < ?', array(1990));
+
+foreach ($rows as $row) {
+    echo 'Album: ' . $row->name . '; Year: ' . $row->year . '; By: ' . $row->author . PHP_EOL;
+}
+```
+Output:
+```
+Album: Long Live The Kane; Year: 1988; By: Big Daddy Kane
+Album: Freedom of Speech... Just Watch What You Say; Year: 1989; By: Ice-T
+Album: Tougher Than Leather; Year: 1988; By: Run DMC
+Album: Beneath The Remains; Year: 1989; By: Sepultura
+```
+
 Ok... at this point I'm probably on some party, getting drunk and sh*t, so... to be continued...
