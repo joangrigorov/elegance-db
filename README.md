@@ -34,7 +34,7 @@ $db = new Elegance_Db(new PDO(
 ));
 ```
 
-# API
+# Documentation
 
 ## query()
 
