@@ -8,6 +8,11 @@ MySQL.
 Any similarities with Zend_Db are not a accidental. You can look at Elegance_Db as a light version of Zend_Db_Adapter_Pdo_Mysql.
 Elegance_Db is inspired by Zend_Db, but It's designed for small and simple projects. 
 
+Elegance Database Wrapper is maintained by Joan-Alexander Grigorov a.k.a Sasquatch
+
+This project is subject to the GNU General Public License v3, so you can modify it, redistribute it,
+print it, burn it, take a sh*t on it, or whatever you want.
+
 # How is Elegance_Db better?
 It's not. It's just lighter and smaller than the most libraries.
 
@@ -20,6 +25,7 @@ Elegance_Db is very small, very simple and yet - very handy.
 
 ```php
 <?php
+require_once 'Elegance/Db.php';
 // Somewhere in your project configuration
 $db = new Elegance_Db(new PDO(
     'mysql:host=HOSTNAME;dbname=DATABASE_NAME',
@@ -333,7 +339,7 @@ update() is very similar to insert(), but (as you probably guessed) is used for 
 * $table - Table to use (table name)
 * $bind - Array of data to insert
 * $where - A typical WHERE condition as a string. An array could be passed for binding parameters. Look at the examples for more information. 
-* $limit - Limit the updated rows. If 0 - not limit is applied
+* $limit - Limit the updated rows. If 0 - no limit is applied
 
 ### Return values
 Returns the count of the affected rows
@@ -366,7 +372,7 @@ delete() is very similar to update(), but (as as you probably guessed again) is 
 
 * $table - Table to use (table name)
 * $where - A typical WHERE condition as a string. An array could be passed for binding parameters. Look at the examples for more information. 
-* $limit - Limit the updated rows. If 0 - not limit is applied
+* $limit - Limit the updated rows. If 0 - no limit is applied
 
 ### Return values
 Returns the count of the affected rows
