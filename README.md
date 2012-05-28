@@ -132,7 +132,7 @@ Always return an array with rows, fetched using the given $fetchStyle (uses PDO:
 
 ```php
 <?php
-$rows = $db->fetchAll('SELECT * FROM my_fav_albums WHERE `year` < ?', array(1990));
+$rows = $db->fetchAll('SELECT * FROM `my_fav_albums` WHERE `year` < ?', array(1990));
 var_dump($rows);
 ```
 Output:
@@ -188,7 +188,7 @@ array(4) {
 Example with foreach:
 ```php
 <?php
-$rows = $db->fetchAll('SELECT * FROM my_fav_albums WHERE `year` < ?', array(1990));
+$rows = $db->fetchAll('SELECT * FROM `my_fav_albums` WHERE `year` < ?', array(1990));
 
 foreach ($rows as $row) {
     echo 'Album: ' . $row->name . '; Year: ' . $row->year . '; By: ' . $row->author . PHP_EOL;
@@ -201,5 +201,33 @@ Album: Freedom of Speech... Just Watch What You Say; Year: 1989; By: Ice-T
 Album: Tougher Than Leather; Year: 1988; By: Run DMC
 Album: Beneath The Remains; Year: 1989; By: Sepultura
 ```
+
+## fetchOne()
+
+fetchOne() is used to return the value of the first column of the first row from the result set.
+
+### Parameters
+
+* $sql - The SQL Query itself
+* $bind - An array with parameters to bind to the placeholders in the query (by default you can use "?" as a placeholder)
+* $driverOptions - Used to configure placeholders for the $bind array. More information [here](http://www.php.net/manual/en/pdo.prepare.php)
+
+### Return values
+
+Returns the value as a string of the first column of the first row from the result set
+
+### Examples
+
+```php
+<?php
+$name = $db->fetchOne('SELECT author FROM `my_fav_albums` WHERE `id` = ?', array(4));
+echo 'My favorite thrash band is ' . $name;
+```
+Output:
+```
+My favorite thrash band is Sepultura
+```
+
+
 
 Ok... at this point I'm probably on some party, getting drunk and sh*t, so... to be continued...
