@@ -228,6 +228,100 @@ Output:
 My favorite thrash band is Sepultura
 ```
 
+## fetchPair()
 
+fetchPair() is used to fetch a select query as an array of key-value pairs. For array keys are used the values of the first column in the select list, and for a values the value of the second column. 
+
+### Parameters 
+
+* $sql - The SQL Query itself
+* $bind - An array with parameters to bind to the placeholders in the query (by default you can use "?" as a placeholder)
+* $driverOptions - Used to configure placeholders for the $bind array. More information [here](http://www.php.net/manual/en/pdo.prepare.php)
+
+### Return values
+
+Always returns array. If the results set from the query is empty, the returned array is also empty.
+
+### Examples
+
+```php
+<?php
+$pairs = $db->fetchPair('SELECT `id`, `name` FROM `my_fav_albums`');
+var_dump($pairs);
+```
+Output:
+```
+array(4) {
+  [1]=>
+  string(18) "Long Live The Kane"
+  [2]=>
+  string(44) "Freedom of Speech... Just Watch What You Say"
+  [3]=>
+  string(20) "Tougher Than Leather"
+  [4]=>
+  string(19) "Beneath The Remains"
+}
+```
+
+Using other column as a key:
+```php
+<?php
+$pairs = $db->fetchPair('SELECT `author`, `name` FROM `my_fav_albums`');
+var_dump($pairs);
+```
+Output:
+```
+array(4) {
+  ["Big Daddy Kane"]=>
+  string(18) "Long Live The Kane"
+  ["Ice-T"]=>
+  string(44) "Freedom of Speech... Just Watch What You Say"
+  ["Run DMC"]=>
+  string(20) "Tougher Than Leather"
+  ["Sepultura"]=>
+  string(19) "Beneath The Remains"
+}
+```
+
+## insert()
+insert() is used to quickly add row to the database, but you don't have to write any SQL. 
+
+### Parameters
+
+* $table - Table to use (table name)
+* $bind - Array of data to insert
+* $isIgnore - If true - creates INSERT IGNORE query (false by default)
+
+### Return values
+
+Returns last inserted primary key value
+
+### Examples
+
+```php
+<?php
+$data = array(
+    'name' => 'All we got is uz',
+    'author' => 'Onyx',
+    'year' => 1995
+);
+$id = $db->insert('records', $data);
+```
+
+Using the $isIgnore flag:
+
+```php
+<?php
+// Let's assume that there is a UNIQUE index on name and author
+$data = array(
+    'name' => 'Dead Serious',
+    'author' => 'Das EFX',
+    'year' => 1992
+);
+$db->insert('records', $data);
+// If we try to run the same again, it won't work, 
+// but any errors from duplicate key will be ignored
+$db->insert('records', $data, true);
+```
 
 Ok... at this point I'm probably on some party, getting drunk and sh*t, so... to be continued...
