@@ -227,11 +227,11 @@ Returns the value as a string of the first column of the first row from the resu
 ```php
 <?php
 $name = $db->fetchOne('SELECT author FROM `my_fav_albums` WHERE `id` = ?', array(4));
-echo 'My favorite thrash band is ' . $name;
+echo 'My favorite trash band is ' . $name;
 ```
 Output:
 ```
-My favorite thrash band is Sepultura
+My favorite trash band is Sepultura
 ```
 
 ## fetchPair()
